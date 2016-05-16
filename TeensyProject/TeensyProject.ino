@@ -76,30 +76,73 @@
 
 
 // Include application, user and local libraries
+#include "ADC.h"
+
 
 
 // Define structures and classes
-
+   ADC *adc = new ADC(); // adc object
 
 // Define variables and constants
 
 
 // Prototypes
-int value;
+int analogue_value;
+int adc_resolution;
+bool en = true;
+
+
 
 // Add setup code
 void setup()
 {
     pinMode(13, OUTPUT);
+    Serial.begin(9600);
+    adc->setResolution(16);
+  
+
+   
+    
 }
 
 // Add loop code
 void loop()
 {
-    digitalWrite(13, HIGH);
-    delay(1000);
-    digitalWrite(13, LOW);
-    delay(1000);
+ 
+    //while loop not working...
     
-    value = adc->analogRead(21);
+    /*
+    while(en){
+        adc_resolution = adc->getResolution();
+        
+        Serial.print("Analogue Resolution: \n");
+        Serial.print(adc_resolution);
+        en = false;
+        
+    }
+     */
+    
+    int analogue_value = adc->analogRead(A9);
+    float analogue_voltage = (float)analogue_value; //19275;//convert to voltage
+    float dividend = 19275.0;
+    float final_analogue_voltage = analogue_voltage/dividend;
+
+    
+    //Serial.print("Analogue Value: \n");
+    //Serial.print(analogue_voltage);
+    Serial.print("\n");
+    Serial.print(final_analogue_voltage, 3);
+    Serial.print("\n");
+  
+    
+    digitalWrite(13, HIGH);
+    //delay(100);
+    digitalWrite(13, LOW);
+    //delay(100);
+
+
+    
+    
+    
+    
 }
