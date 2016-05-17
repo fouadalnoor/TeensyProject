@@ -130,8 +130,13 @@ void loop()
     
     //Serial.print("Analogue Value: \n");
     //Serial.print(analogue_voltage);
+    
     Serial.print("\n");
-    Serial.print(final_analogue_voltage, 3);
+    Serial.print(analogue_value, 3);
+    Serial.print("\n");
+    
+    Serial.print("\n");
+    Serial.print(final_analogue_voltage, 3); //only accurate to about 2 decimal places. Supply limit might play a role.
     Serial.print("\n");
   
     
