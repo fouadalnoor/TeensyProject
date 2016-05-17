@@ -77,11 +77,13 @@
 
 // Include application, user and local libraries
 #include "ADC.h"
-
+#include "Arduino.h"
+#include "DS3231RTC.h"
 
 
 // Define structures and classes
    ADC *adc = new ADC(); // adc object
+   //DS3231RTC *ds = new DS3231RTC();
 
 // Define variables and constants
 
@@ -99,7 +101,7 @@ void setup()
     pinMode(13, OUTPUT);
     Serial.begin(9600);
     adc->setResolution(16);
-  
+    //ds->chipPresent();
 
    
     
@@ -144,6 +146,8 @@ void loop()
     //delay(100);
     digitalWrite(13, LOW);
     //delay(100);
+    
+    
 
 
     
