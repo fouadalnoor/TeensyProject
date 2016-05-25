@@ -81,6 +81,7 @@
 #include "Test.h"
 //#include "SoftSPI.h"
 #include "LowPower_Teensy3_mod.h"
+//#include "TimerOne.h"
 //#include "DS3231RTC.h"
 
 
@@ -96,7 +97,20 @@ int analogue_value;
 int adc_resolution;
 bool en = true;
 
+TEENSY3_LP LP = TEENSY3_LP(); //Create Object for sleep
 
+
+void callbackhandler() {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(100);
+    digitalWrite(LED_BUILTIN, LOW);
+    
+    loop();//Go back to the loop when awake again.
+}
+
+void exampleInterruptFunction() {
+ Serial.print("Interrupt Executed\n");
+}
 
 // Add setup code
 void setup()
@@ -105,6 +119,15 @@ void setup()
     Serial.begin(9600);
     adc->setResolution(16);
     //ds->chipPresent();
+    
+    //Set  pin 0 as an input and attach it as an interrupt (for sleeping purposes).
+    pinMode(0, INPUT);
+    attachInterrupt(0, callbackhandler, CHANGE); //Only change from Low-High works?
+    
+    //Example Timer as an interrupt trigger - Need the .h file.
+    
+    //Timer1.initialize(150000);
+    //Timer1.attachInterrupt(exampleInterruptFunction);
 
    
     
@@ -113,6 +136,8 @@ void setup()
 // Add loop code
 void loop()
 {
+    //myTest.doSomething();
+    //delay(500);
  
     //while loop not working...
     
@@ -127,35 +152,47 @@ void loop()
     }
      */
     
-    myTest.doSomething();
-    delay(500);
+    digitalWrite(13, HIGH);
+    delay(100);
+    digitalWrite(13, LOW);
+    delay(100);
     
-    /*
+    
     int analogue_value = adc->analogRead(A9);
     float analogue_voltage = (float)analogue_value; //19275;//convert to voltage
     float dividend = 19275.0;
     float final_analogue_voltage = analogue_voltage/dividend;
+    String finalStringValue = (String)final_analogue_voltage;
 
     
     //Serial.print("Analogue Value: \n");
     //Serial.print(analogue_voltage);
     
-    Serial.print("\n");
-    Serial.print(analogue_value, 3);
-    Serial.print("\n");
+   // Serial.print("\n");
+   // Serial.print(analogue_value, 3);
+   // Serial.print("\n");
     
-    Serial.print("\n");
-    Serial.print(final_analogue_voltage, 3); //only accurate to about 2 decimal places. Supply limit might play a role.
-    Serial.print("\n");
+    Serial.print(" ");
+    Serial.print(finalStringValue); //only accurate to about 2 decimal places. Supply limit might play a role.
+    delay(1000);
+    
+    
   
-    
+    //The value should be <3.4
     if(final_analogue_voltage<2)
     {
+        //sleep
+        Serial.print("Enter Sleep mode"); //only accurate to about 2 decimal places. Supply limit might play a role.
+        Serial.print("\n");
+        
         digitalWrite(13, HIGH);
         delay(100);
         digitalWrite(13, LOW);
         delay(100);
+        
+       
+        LP.Sleep();
     }
-   */
+   
     
 }

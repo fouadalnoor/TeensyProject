@@ -48,9 +48,9 @@ APP_LIBS_LIST = 0
 # default = 0 = none
 #
 # USER = Adafruit_CC3000_Library Adafruit_NeoPixel 
-#	adclibrary FreqCount IRremote Keypad SPIFlash 
+#	adclibrary FreqCount IRremote Keypad SPIFlash  //Do not need to include TimerOne
 #
-USER_LIBS_LIST = adclibrary Test LowPower_Teensy3_mod
+USER_LIBS_LIST = adclibrary Test LowPower_Teensy3_mod 
 
 # List local libraries here
 # default = empty = all
@@ -163,6 +163,58 @@ MAKEFILE_PATH  = $(CURRENT_DIR)/Makefiles
 UTILITIES_PATH = $(CURRENT_DIR)/Utilities
 
 include $(MAKEFILE_PATH)/Step1.mk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
