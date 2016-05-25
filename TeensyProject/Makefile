@@ -42,7 +42,7 @@
 #	TinyGPS Tlc5940 TouchScreen UTFT VirtualWire Wire x10 XBee 
 #	XPT2046_Touchscreen 
 #
-APP_LIBS_LIST = 0
+APP_LIBS_LIST = TimerOne
 
 # List user's libraries here 
 # default = 0 = none
@@ -163,6 +163,55 @@ MAKEFILE_PATH  = $(CURRENT_DIR)/Makefiles
 UTILITIES_PATH = $(CURRENT_DIR)/Utilities
 
 include $(MAKEFILE_PATH)/Step1.mk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
