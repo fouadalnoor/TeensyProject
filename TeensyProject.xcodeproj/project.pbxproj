@@ -4706,6 +4706,11 @@
 		E20EC1E41CEB521A003BDA79 /* SdVolume.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SdVolume.cpp; sourceTree = "<group>"; };
 		E20EC1E51CEB521A003BDA79 /* SdVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SdVolume.h; sourceTree = "<group>"; };
 		E20EC1E71CEB521A003BDA79 /* SoftSPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftSPI.h; sourceTree = "<group>"; };
+		E28A6A911CF4B09B0097C199 /* doing_something.pde */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = doing_something.pde; sourceTree = "<group>"; };
+		E28A6A921CF4B09B0097C199 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		E28A6A931CF4B09B0097C199 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		E28A6A941CF4B09B0097C199 /* Test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Test.cpp; sourceTree = "<group>"; };
+		E28A6A951CF4B09B0097C199 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		E2AE74731CE6023E00331D51 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2AE74761CE6023E00331D51 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E2AE74781CE6023E00331D51 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
@@ -10874,10 +10879,11 @@
 		AAAA160513133840AA000ADB /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E28A6A8E1CF4B09B0097C199 /* Test */,
+				E20EC15E1CEB521A003BDA79 /* LowPower_Teensy3_mod */,
 				E20EC1471CEB4CA6003BDA79 /* readme.txt */,
 				E20EC1501CEB521A003BDA79 /* ADS129xADC */,
 				E20EC1551CEB521A003BDA79 /* DS3231RTC */,
-				E20EC15E1CEB521A003BDA79 /* LowPower_Teensy3_mod */,
 				E20EC1871CEB521A003BDA79 /* SdFat */,
 				E20EC1E61CEB521A003BDA79 /* SoftSPI */,
 				AAAA160513133840AA000ADC /* Adafruit_CC3000_Library */,
@@ -11090,8 +11096,9 @@
 				E20EC1711CEB521A003BDA79 /* README.md */,
 				E20EC1721CEB521A003BDA79 /* utility */,
 			);
-			path = LowPower_Teensy3_mod;
-			sourceTree = "<group>";
+			name = LowPower_Teensy3_mod;
+			path = "/Users/fouadal-noor/Documents/Arduino/libraries/LowPower_Teensy3_mod";
+			sourceTree = "<absolute>";
 		};
 		E20EC15F1CEB521A003BDA79 /* examples */ = {
 			isa = PBXGroup;
@@ -11514,6 +11521,34 @@
 				E20EC1E71CEB521A003BDA79 /* SoftSPI.h */,
 			);
 			path = SoftSPI;
+			sourceTree = "<group>";
+		};
+		E28A6A8E1CF4B09B0097C199 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				E28A6A8F1CF4B09B0097C199 /* examples */,
+				E28A6A921CF4B09B0097C199 /* keywords.txt */,
+				E28A6A931CF4B09B0097C199 /* readme.txt */,
+				E28A6A941CF4B09B0097C199 /* Test.cpp */,
+				E28A6A951CF4B09B0097C199 /* Test.h */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		E28A6A8F1CF4B09B0097C199 /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				E28A6A901CF4B09B0097C199 /* doing_something */,
+			);
+			path = examples;
+			sourceTree = "<group>";
+		};
+		E28A6A901CF4B09B0097C199 /* doing_something */ = {
+			isa = PBXGroup;
+			children = (
+				E28A6A911CF4B09B0097C199 /* doing_something.pde */,
+			);
+			path = doing_something;
 			sourceTree = "<group>";
 		};
 		E2AE74611CE6023E00331D51 = {

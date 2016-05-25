@@ -78,13 +78,16 @@
 // Include application, user and local libraries
 #include "ADC.h"
 #include "Arduino.h"
-#include "DS3231RTC.h"
+#include "Test.h"
+//#include "SoftSPI.h"
+#include "LowPower_Teensy3_mod.h"
+//#include "DS3231RTC.h"
 
 
 // Define structures and classes
    ADC *adc = new ADC(); // adc object
    //DS3231RTC *ds = new DS3231RTC();
-
+    Test myTest = Test(3);
 // Define variables and constants
 
 
@@ -124,6 +127,10 @@ void loop()
     }
      */
     
+    myTest.doSomething();
+    delay(500);
+    
+    /*
     int analogue_value = adc->analogRead(A9);
     float analogue_voltage = (float)analogue_value; //19275;//convert to voltage
     float dividend = 19275.0;
@@ -142,16 +149,13 @@ void loop()
     Serial.print("\n");
   
     
-    digitalWrite(13, HIGH);
-    //delay(100);
-    digitalWrite(13, LOW);
-    //delay(100);
-    
-    
-
-
-    
-    
-    
+    if(final_analogue_voltage<2)
+    {
+        digitalWrite(13, HIGH);
+        delay(100);
+        digitalWrite(13, LOW);
+        delay(100);
+    }
+   */
     
 }
