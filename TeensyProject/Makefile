@@ -42,7 +42,7 @@
 #	TinyGPS Tlc5940 TouchScreen UTFT VirtualWire Wire x10 XBee 
 #	XPT2046_Touchscreen 
 #
-APP_LIBS_LIST = TimerOne
+APP_LIBS_LIST = TimerOne 
 
 # List user's libraries here 
 # default = 0 = none
@@ -50,7 +50,7 @@ APP_LIBS_LIST = TimerOne
 # USER = Adafruit_CC3000_Library Adafruit_NeoPixel 
 #	adclibrary FreqCount IRremote Keypad SPIFlash  //Do not need to include TimerOne
 #
-USER_LIBS_LIST = adclibrary Test LowPower_Teensy3_mod 
+USER_LIBS_LIST = adclibrary Test LowPower_Teensy3_mod
 
 # List local libraries here
 # default = empty = all
@@ -144,7 +144,7 @@ NO_SERIAL_CONSOLE =
 # SERIAL_BAUDRATE for the serial console, 9600 by default
 # Uncomment and specify another speed
 #
-#SERIAL_BAUDRATE = 9600
+SERIAL_BAUDRATE = 115200
 
 
 # Miscellaneous
@@ -163,6 +163,64 @@ MAKEFILE_PATH  = $(CURRENT_DIR)/Makefiles
 UTILITIES_PATH = $(CURRENT_DIR)/Utilities
 
 include $(MAKEFILE_PATH)/Step1.mk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

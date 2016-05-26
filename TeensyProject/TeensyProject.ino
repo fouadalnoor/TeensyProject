@@ -79,147 +79,91 @@
 #include "ADC.h"
 #include "Arduino.h"
 #include "Test.h"
-//#include "SoftSPI.h"
 #include "LowPower_Teensy3_mod.h"
 #include "TimerOne.h"
+//#include "LowPower.h"
 //#include "DS3231RTC.h"
+//#include "SoftSPI.h"
 
 
 // Define structures and classes
    ADC *adc = new ADC(); // adc object
-   //DS3231RTC *ds = new DS3231RTC();
-    Test myTest = Test(3);
+
 // Define variables and constants
-
-
-// Prototypes
 int analogue_value;
 int adc_resolution;
-bool en = true;
 float final_analogue_voltage;
 
 TEENSY3_LP LP = TEENSY3_LP(); //Create Object for sleep
 
+// Prototypes
+void sleepInterrupt(void);
+//void callbackhandler(void);
 
-
-void sleepInterrupt() {
- 
-    //Is entered every 1ms
-    Serial.print("Sleep Interrupt Entered\n");
-    Serial.print("\n");
-    
-    //fast blinking indicates entered sleep interrupt
-    digitalWrite(13, HIGH);
-    delay(100);
-    digitalWrite(13, LOW);
-    delay(100);
-    
-
-    /*
-    //Measure voltage
-    int analogue_value = adc->analogRead(A9);
-    float analogue_voltage = (float)analogue_value; //19275;//convert to voltage
-    float dividend = 19275.0;
-    final_analogue_voltage = analogue_voltage/dividend;
-    */
-    
-    //Serial.print("Voltage value is: ");
-   // Serial.print(final_analogue_voltage); //only accurate to about 2 decimal places. Supply limit might play a role.
-    //Serial.print("\n");
-     
-    
-    
-  //check battery voltage is below 2V (should be 3.4V), then sleep
-    
-    
-
-    /*
-    if(final_analogue_voltage<2)
-    {
-        Serial.print("Enter Sleep mode"); //only accurate to about 2 decimal places. Supply limit might play a role.
-        Serial.print("\n");
-        
-        LP.Sleep(); //May disable Timer1?  or disable digital interrupt?
-        
-    }
-    
-    else {
-        loop(); //Enter loop if voltage is >2V (should be 3.4V)
-    }
-     
-    */
- 
-     loop();
-}
-
-
-void callbackhandler() {
-    
-    Serial.print("Entered Callback Handler"); //only accurate to about 2 decimal places. Supply limit might play a role.
-    Serial.print("\n");
-    
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(1000);
-    digitalWrite(LED_BUILTIN, LOW);
-    
-    //loop();//Go back to the loop when awake again.
-    sleepInterrupt();
-}
 
 // Add setup code
 void setup()
 {
     pinMode(13, OUTPUT);
-    Serial.begin(9600);
+    Serial.begin(115200);
     adc->setResolution(16);
-    //ds->chipPresent();
+    Timer1.initialize();
+    Timer1.attachInterrupt(sleepInterrupt, 1000000); //Max time period is 1ms?
     
-    //Set  pin 0 as an input and attach it as an interrupt (for sleeping purposes).
-    pinMode(0, INPUT);
-    attachInterrupt(0, callbackhandler, CHANGE); //Only change from Low-High works? - Seems like both work.
-    
-    //Example Timer as an interrupt trigger - Need the .h file.
-    
-    //Timer1.initialize();
-    //Timer1.attachInterrupt(sleepInterrupt, 1000000); //Max time period is 1ms? //does not work when asleep?
-
+    //Set pin0 to input and attach callbackhandler as an external interrupt.
+    //pinMode(0, INPUT);
+    //attachInterrupt(0, callbackhandler, CHANGE);
 }
 
 // Add loop code
 void loop()
 {
+    //digitalWrite(13, LOW);//Set low to indicate program in main loop.
+    
     Serial.print("\n");
     Serial.print("In main loop - Awake \n");
     Serial.print("\n");
     
-    //slow blinking indicates awake
-    digitalWrite(13, HIGH);
-    delay(1000);
-    digitalWrite(13, LOW);
-    delay(1000);
+     Serial.print("Final analogue value: ");
+     Serial.print(final_analogue_voltage);
+     Serial.print("\n");
+    
+    //delay needs to be there to ensure that the ADC reads the actual value. Could be potentially removed, but leave it for stability
+    //and to see the serial output.
+    delay(50);
+    
+    //The value should be <3.4. Checks voltage level.
+    
+    if(final_analogue_voltage<2)
+    {
+        //slow blinking indicates entered sleep
+        digitalWrite(13, HIGH);
+        delay(500);
+        digitalWrite(13, LOW);
 
-    //it appears that we need the reading of the ADC and the if statement to check voltage level in this loop?
+        LP.Sleep(); //enter sleep.
+    }
+    
+    ///THE REST THE CODE SHOULD BE BELOW HERE///
+}
+
+void sleepInterrupt() {
+
+    //Is entered every 1ms
+    Serial.print("Sleep Interrupt Entered\n");
+    Serial.print("\n");
+    
+    //Update voltage measurment.
     int analogue_value = adc->analogRead(A9);
     float analogue_voltage = (float)analogue_value; //19275;//convert to voltage
     float dividend = 19275.0;
     final_analogue_voltage = analogue_voltage/dividend;
-    
-    
-    //The value should be <3.4
-    if(final_analogue_voltage<2)
-    {
-        //sleep
-        Serial.print("Enter Sleep mode"); //only accurate to about 2 decimal places. Supply limit might play a role.
-        Serial.print("\n");
-        
-        digitalWrite(13, HIGH);
-        delay(100);
-        digitalWrite(13, LOW);
-        delay(100);
-        LP.Sleep();
-    }
-    
-    
-   
-    
 }
+
+/*
+void callbackhandler() {
+    
+    Serial.print("Entered Callback Handler"); //only accurate to about 2 decimal places. Supply limit might play a role.
+    Serial.print("\n");
+}
+*/
