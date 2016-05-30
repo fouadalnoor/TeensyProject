@@ -107,6 +107,7 @@ void setup()
     pinMode(13, OUTPUT);
     Serial.begin(115200);
     adc->setResolution(16);
+    adc->setReference(ADC_REF_1V2); //set as 1.2V as the battery goes down to 3.4V. Thus the internal 3.3V ref will not be reliable.
     Timer1.initialize();
     Timer1.attachInterrupt(sleepInterrupt, 1000000); //Max time period is 1ms?
     
@@ -132,17 +133,22 @@ void loop()
     //and to see the serial output.
     delay(50);
     
-    //The value should be <3.4. Checks voltage level.
-    
-    if(final_analogue_voltage<2)
+
+    //At Vcc = 3.4V the analogue value will be 0.95V at the ADC input (due to potential divider) I.e that's the threshold voltage
+    //using a 220K and 560K potential divider (tolerance plays a role here..).
+
+    if(final_analogue_voltage<0.95)
     {
-        //slow blinking indicates entered sleep
+        //slow blinking indicates low voltage. 
         digitalWrite(13, HIGH);
         delay(500);
         digitalWrite(13, LOW);
 
-        LP.Sleep(); //enter sleep.
+        //LP.Sleep(); //enter sleep.
     }
+    
+     //Sleep most of the time. Sample ADC every 1ms
+     LP.Sleep();
     
     ///THE REST THE CODE SHOULD BE BELOW HERE///
 }
@@ -155,8 +161,8 @@ void sleepInterrupt() {
     
     //Update voltage measurment.
     int analogue_value = adc->analogRead(A9);
-    float analogue_voltage = (float)analogue_value; //19275;//convert to voltage
-    float dividend = 19275.0;
+    float analogue_voltage = (float)analogue_value;
+    float dividend = 54612.5; //convert 1.2V binary to voltage
     final_analogue_voltage = analogue_voltage/dividend;
 }
 
