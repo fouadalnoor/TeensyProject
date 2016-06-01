@@ -119,7 +119,6 @@ void setup()
 // Add loop code
 void loop()
 {
-    //digitalWrite(13, LOW);//Set low to indicate program in main loop.
     
     Serial.print("\n");
     Serial.print("In main loop - Awake \n");
@@ -139,12 +138,11 @@ void loop()
 
     if(final_analogue_voltage<0.95)
     {
-        //slow blinking indicates low voltage. 
+        //slow blinking indicates low voltage.
         digitalWrite(13, HIGH);
         delay(500);
         digitalWrite(13, LOW);
 
-        //LP.Sleep(); //enter sleep.
     }
     
      //Sleep most of the time. Sample ADC every 1ms
@@ -164,6 +162,8 @@ void sleepInterrupt() {
     float analogue_voltage = (float)analogue_value;
     float dividend = 54612.5; //convert 1.2V binary to voltage
     final_analogue_voltage = analogue_voltage/dividend;
+    
+    
 }
 
 /*
