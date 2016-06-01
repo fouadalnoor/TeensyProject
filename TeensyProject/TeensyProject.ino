@@ -124,9 +124,6 @@ void loop()
     Serial.print("In main loop - Awake \n");
     Serial.print("\n");
     
-     Serial.print("Final analogue value: ");
-     Serial.print(final_analogue_voltage);
-     Serial.print("\n");
     
     //delay needs to be there to ensure that the ADC reads the actual value. Could be potentially removed, but leave it for stability
     //and to see the serial output.
@@ -146,7 +143,9 @@ void loop()
     }
     
      //Sleep most of the time. Sample ADC every 1ms
-     LP.Sleep();
+
+    //LP.DeepSleep(LPTMR_WAKE, 1, sleepInterrupt()); // not sure why its not working.
+    LP.Sleep();
     
     ///THE REST THE CODE SHOULD BE BELOW HERE///
 }
@@ -164,6 +163,9 @@ void sleepInterrupt() {
     final_analogue_voltage = analogue_voltage/dividend;
     
     
+    Serial.print("Final analogue value: ");
+    Serial.print(final_analogue_voltage);
+    Serial.print("\n");
 }
 
 /*
